@@ -5,6 +5,7 @@
 ## Highlights
 
 - 网页智能正文识别：`article` / `main` 优先，跳过导航、页脚、代码、表单、隐藏元素和 CSS 文本
+- 菜单逐项双语；卡片模块保留原文，并在下方生成样式相同的译文副本
 - 菜单与卡片双语：菜单逐项显示原文 + 译文；卡片模块在原卡片下方生成样式相同的译文卡片
 - 多连接配置：阿里云、腾讯云、DeepL、Azure、MyMemory、LibreTranslate 以及任意 OpenAI 兼容大模型
 - 大模型手动配置：Base URL / API Key / 模型名，支持一键获取 `/models` 列表
