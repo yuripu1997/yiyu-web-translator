@@ -20,6 +20,6 @@
 
 ## Notes
 
-- Chrome / Edge / Brave share the Chromium build.
+- Chrome / Edge / Brave share the Chromium build. Chrome is tested; Edge and Brave are **not individually tested**.
 - The CRX file is an optional packaged artifact; the ZIP is recommended for manual installation.
 - No API keys or credentials are bundled.

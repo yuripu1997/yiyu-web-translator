@@ -80,7 +80,7 @@
 5. 点击「加载已解压的扩展程序」，选择解压后的目录。
 6. 把「译屿」固定到工具栏。
 
-> Chromium 版本已在 Chrome 157 上测试；Edge、Brave 等其他 Chromium 浏览器使用同一构建。
+> Chromium 版本已在 Chrome 157 上测试；Edge、Brave 等其他 Chromium 浏览器使用同一构建，**尚未逐一测试**。
 
 ### Firefox
 

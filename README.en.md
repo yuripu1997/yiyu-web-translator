@@ -81,7 +81,7 @@ YIYU:
 5. Click **Load unpacked** and select the extracted folder.
 6. Pin YIYU to the toolbar.
 
-> The Chromium build is tested on Chrome 157. Edge, Brave and other Chromium browsers use the same build.
+> Tested on Chrome 157. Edge, Brave and other Chromium browsers use the same build and are **not individually tested**.
 
 ### Firefox
 

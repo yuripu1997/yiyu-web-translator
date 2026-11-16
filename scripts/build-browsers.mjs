@@ -51,7 +51,7 @@ if (existsSync(chromeBinary)) {
   await rm(packRoot, { recursive: true, force: true });
 }
 
-const README = `# 译屿 ${version} Release Assets\n\n- yiyu-chromium-v${version}.zip — Chrome / Edge / Brave / other Chromium browsers. Tested on Chrome.\n- yiyu-firefox-v${version}.zip — Firefox build. UNTESTED; unsigned temporary add-on for about:debugging. Report issues: https://github.com/GOBUT/yiyu-web-translator/issues\n- yiyu-chromium-v${version}.crx — optional packaged Chromium artifact; manual load only.\n\nThe Chromium and Firefox builds share the same source and feature set. Firefox support is experimental.\n`;
+const README = `# 译屿 ${version} Release Assets\n\n- yiyu-chromium-v${version}.zip — Chrome / Edge / Brave / other Chromium browsers. Tested on Chrome; Edge/Brave not individually tested.\n- yiyu-firefox-v${version}.zip — Firefox build. UNTESTED; unsigned temporary add-on for about:debugging. Report issues: https://github.com/GOBUT/yiyu-web-translator/issues\n- yiyu-chromium-v${version}.crx — optional packaged Chromium artifact; manual load only.\n\nThe Chromium and Firefox builds share the same source and feature set. Firefox support is experimental.\n`;
 await writeFile(path.join(releaseDir, "README.md"), README, "utf8");
 
 const entries = [];
