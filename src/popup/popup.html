@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>译屿</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <img class="hero-bg" src="assets/brand/hero.webp" alt="" />
+        <div class="hero-veil"></div>
+        <div class="hero-content">
+          <div class="brand-row">
+            <div class="brand">
+              <img class="logo" src="assets/brand/mark.png" alt="" />
+              <div>
+                <h1>译屿</h1>
+                <p>让每一页，都说你的语言</p>
+              </div>
+            </div>
+            <button id="settingsBtn" class="icon-btn" title="设置" aria-label="设置">设置</button>
+          </div>
+          <div class="hero-note">多连接 · 自动回退</div>
+        </div>
+      </header>
+
+      <div id="updateNotice" class="update-notice hidden">
+        <span id="updateText">发现新版本</span>
+        <a id="updateLink" href="https://github.com/GOBUT/yiyu-web-translator/releases" target="_blank" rel="noreferrer">下载</a>
+      </div>
+
+      <div id="setupCard" class="setup-card hidden">
+        <div id="setupTitle" class="setup-title">先配置一条翻译连接</div>
+        <p id="setupDesc">在设置页填入任意服务商的 Key，或选择免密钥的 MyMemory。</p>
+        <button id="setupBtn" class="primary-btn small" type="button">去配置</button>
+      </div>
+
+      <main id="mainPanel">
+        <div class="profile-row">
+          <label class="row-label" for="profileSelect">当前连接</label>
+          <select id="profileSelect" aria-label="当前连接"></select>
+        </div>
+        <button id="translateBtn" class="primary-btn" type="button">翻译此页</button>
+        <div id="statusText" class="status-text">正在读取页面状态…</div>
+        <div id="providerText" class="provider-text">阿里云机器翻译</div>
+
+        <div class="row">
+          <span class="row-label">显示方式</span>
+          <div class="segmented" id="modeGroup">
+            <button type="button" data-mode="bilingual">双语对照</button>
+            <button type="button" data-mode="translation">仅译文</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="row-label" for="targetLang">目标语言</label>
+          <select id="targetLang"></select>
+        </div>
+
+        <label class="switch-row">
+          <span>
+            <span class="switch-title">打开网页时自动翻译</span>
+            <span class="switch-desc">可在站点规则里单独设置</span>
+          </span>
+          <input id="autoTranslate" type="checkbox" />
+          <span class="switch-ui"></span>
+        </label>
+
+        <div class="row">
+          <label class="row-label" for="siteRule">本网站</label>
+          <select id="siteRule">
+            <option value="default">跟随默认</option>
+            <option value="always">总是自动翻译</option>
+            <option value="never">从不翻译</option>
+          </select>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <span id="usageText">本月已用 0 字符</span>
+      </footer>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

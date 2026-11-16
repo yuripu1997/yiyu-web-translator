@@ -1,0 +1,314 @@
+:root {
+  color-scheme: light;
+  --paper: #f3eee3;
+  --surface: #fbf8f0;
+  --ink: #17231e;
+  --muted: #6b756d;
+  --line: #d8d1c2;
+  --forest: #0f4c45;
+  --forest-deep: #0a3732;
+  --coral: #bf452c;
+  --ok: #2f6b52;
+  --danger: #b9402c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #101815;
+    --surface: #17231e;
+    --ink: #ece8db;
+    --muted: #a4aea5;
+    --line: #33453b;
+    --forest: #2f6f60;
+    --forest-deep: #24594e;
+    --coral: #ff8062;
+    --ok: #8bc7a8;
+    --danger: #ff8b78;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 380px;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 13px/1.55 "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, select { font: inherit; }
+
+.app { padding: 12px; }
+
+.hero {
+  position: relative;
+  min-height: 108px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--forest);
+  color: #fffaf0;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 53%;
+  opacity: 0.8;
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 43, 37, 0.86), rgba(10, 43, 37, 0.35));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 15px 16px;
+}
+
+.brand-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+
+.logo {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  margin: 0;
+  font: 600 20px/1.1 "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+  letter-spacing: 0.04em;
+}
+
+.brand p {
+  margin: 3px 0 0;
+  color: rgba(255, 250, 240, 0.65);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.icon-btn {
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 250, 240, 0.28);
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255, 250, 240, 0.8);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.icon-btn:hover { background: rgba(255, 250, 240, 0.12); color: #fffaf0; }
+
+.hero-note {
+  margin-top: 16px;
+  color: rgba(255, 250, 240, 0.62);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.setup-card {
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.setup-title { margin-bottom: 5px; font-weight: 600; }
+.setup-card p { margin: 0 0 10px; color: var(--muted); font-size: 11px; }
+
+.primary-btn {
+  width: 100%;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--forest);
+  color: #fffaf0;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(23, 35, 30, 0.14);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.primary-btn:hover { background: var(--forest-deep); }
+.primary-btn:active { transform: translateY(1px); }
+.primary-btn:disabled { opacity: 0.55; cursor: default; }
+.primary-btn.small { width: auto; padding: 8px 14px; font-size: 11px; }
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0 12px;
+}
+
+.profile-row select { flex: 1; max-width: none; }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+
+.row-label { color: var(--muted); font-size: 11px; }
+
+select {
+  max-width: 180px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+}
+
+select:focus { border-color: var(--forest); }
+
+.status-text {
+  min-height: 17px;
+  margin: 7px 2px 1px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.provider-text {
+  margin: 0 2px 11px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.segmented button {
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.segmented button.active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 5px rgba(23, 35, 30, 0.08);
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.switch-title { display: block; font-size: 11px; }
+.switch-desc { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+.switch-row input { display: none; }
+
+.switch-ui {
+  position: relative;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 21px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: background 0.15s ease;
+}
+
+.switch-ui::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fffaf0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease;
+}
+
+.switch-row input:checked + .switch-ui { background: var(--forest); }
+.switch-row input:checked + .switch-ui::after { transform: translateX(15px); }
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--coral);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.link-btn:hover { text-decoration: underline; }
+
+.hidden { display: none !important; }
+
+.update-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px 14px 0;
+  padding: 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--coral) 30%, var(--line));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--coral) 7%, var(--surface));
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.update-notice a {
+  flex: 0 0 auto;
+  color: var(--coral);
+  font-weight: 700;
+  text-decoration: none;
+}

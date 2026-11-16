@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-firefox/
+release/
+*.zip
+*.crx
+*.xpi
+.DS_Store
+npm-debug.log*
+scripts/__pycache__/
+.npm-cache/
+qingyi-web-translator/

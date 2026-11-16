@@ -1,0 +1,21 @@
+{
+  "name": "yiyu-web-translator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "译屿 —— 支持多连接、多服务商和 OpenAI 兼容大模型的网页双语翻译扩展",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "npm run build && cd dist && zip -qr ../yiyu-web-translator.zip .",
+    "icons": "python3 scripts/make-icons.py",
+    "build:browsers": "npm run build && node scripts/build-browsers.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "jsdom": "^26.1.0",
+    "tencentcloud-sdk-nodejs-common": "^4.1.220",
+    "vitest": "^3.2.4"
+  }
+}

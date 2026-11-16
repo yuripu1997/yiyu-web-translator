@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "译屿 - 网页翻译",
+    "description": "扩展名称"
+  },
+  "extensionDescription": {
+    "message": "基于腾讯云机器翻译的免费网页双语翻译扩展。",
+    "description": "扩展描述"
+  }
+}

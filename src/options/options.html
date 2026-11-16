@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>译屿设置</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="rail">
+        <div class="rail-brand">
+          <img class="brand-mark" src="assets/brand/mark.png" alt="" />
+          <div>
+            <strong>译屿</strong>
+            <span>YIYU · WEB TRANSLATOR</span>
+          </div>
+        </div>
+        <nav class="rail-nav" aria-label="设置导航">
+          <a class="active" href="#service">连接配置</a>
+          <a href="#translation">翻译偏好</a>
+          <a href="#shortcuts">快捷翻译</a>
+          <a href="#sites">站点规则</a>
+          <a href="#performance">性能与缓存</a>
+          <a href="#about">关于</a>
+        </nav>
+        <div class="rail-art">
+          <img src="assets/brand/hero.webp" alt="" />
+          <p>把世界读成你的语言。</p>
+        </div>
+        <div class="rail-footer">本地运行 · 密钥不出浏览器</div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1>让每一页，都说你的语言</h1>
+            <p class="subline">连接你的翻译服务，保留原文和译文的呼吸感。</p>
+          </div>
+          <div class="top-actions">
+            <span id="saveStatus" class="save-status">已保存</span>
+            <button id="resetBtn" class="ghost-btn" type="button">恢复默认</button>
+          </div>
+        </header>
+
+        <section class="hero-panel" aria-label="译屿介绍">
+          <div class="hero-copy">
+            <h2>先选一条连接，<br />再让页面自己说话。</h2>
+            <p>阿里云、DeepL、Azure、大模型都可以并存。失效时，译屿会按顺序切换到下一条可用连接。</p>
+            <div class="hero-meta"><span>多连接</span><span>自动回退</span><span>本地缓存</span></div>
+          </div>
+          <div class="hero-image-wrap">
+            <img src="assets/brand/hero.webp" alt="纸张与线装书般的翻译意象" />
+            <span class="hero-stamp">译屿</span>
+          </div>
+        </section>
+
+        <section id="service" class="panel">
+          <div class="section-head">
+            <div>
+              <h2>连接配置</h2>
+              <p>可以同时保存多个 API / 大模型连接。当前连接失效时，自动尝试下一条。</p>
+            </div>
+            <div class="inline-actions">
+              <button id="testBtn" class="primary-btn small" type="button">测试当前连接</button>
+              <span id="testResult" class="test-result"></span>
+            </div>
+          </div>
+
+          <div class="profile-bar">
+            <div id="profileList" class="profile-list" role="tablist" aria-label="连接配置列表"></div>
+            <button id="addProfileBtn" class="add-profile-btn" type="button">＋ 新建连接</button>
+          </div>
+
+          <div class="profile-editor">
+            <label class="field profile-name-field">
+              <span>连接名称</span>
+              <input id="profileNameInput" type="text" autocomplete="off" spellcheck="false" placeholder="例如：阿里云 · 主账号" />
+            </label>
+            <label class="field">
+              <span>服务商类型</span>
+              <select data-setting="provider" id="providerSelect">
+                <option value="alibaba">阿里云机器翻译（推荐）</option>
+                <option value="tencent">腾讯云机器翻译（TMT）</option>
+                <option value="deepl">DeepL API（Free / Pro）</option>
+                <option value="azure">Azure Translator（F0 免费层）</option>
+                <option value="mymemory">MyMemory（免密钥）</option>
+                <option value="libretranslate">LibreTranslate（自建/公共实例）</option>
+                <option value="llm">大模型（OpenAI 兼容接口）</option>
+              </select>
+            </label>
+            <button id="deleteProfileBtn" class="danger-link" type="button">删除此连接</button>
+          </div>
+
+          <div id="alibabaPanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field">
+                <span>AccessKeyId</span>
+                <input data-setting="alibabaAccessKeyId" type="text" autocomplete="off" spellcheck="false" placeholder="LTAI..." />
+              </label>
+              <label class="field">
+                <span>AccessKeySecret</span>
+                <div class="secret-wrap">
+                  <input data-setting="alibabaAccessKeySecret" type="password" autocomplete="off" spellcheck="false" placeholder="请输入 AccessKeySecret" />
+                  <button id="toggleAlibabaSecret" type="button" class="mini-btn">显示</button>
+                </div>
+              </label>
+              <label class="field full">
+                <span>接口地址 Endpoint</span>
+                <input data-setting="alibabaEndpoint" type="text" autocomplete="off" spellcheck="false" />
+              </label>
+            </div>
+            <p class="hint">阿里云机器翻译通用版每月有 <strong>100 万字符</strong>免费额度，每月 1 日重置。建议使用 RAM 子账号的 AccessKey。 <a class="link" href="https://ram.console.aliyun.com/manage/ak" target="_blank" rel="noreferrer">获取 AccessKey ↗</a> · <a class="link" href="https://mt.console.aliyun.com/" target="_blank" rel="noreferrer">机器翻译控制台 ↗</a></p>
+          </div>
+
+          <div id="tencentPanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field">
+                <span>SecretId</span>
+                <input data-setting="secretId" type="text" autocomplete="off" spellcheck="false" placeholder="AKID..." />
+              </label>
+              <label class="field">
+                <span>SecretKey</span>
+                <div class="secret-wrap">
+                  <input data-setting="secretKey" type="password" autocomplete="off" spellcheck="false" placeholder="请输入 SecretKey" />
+                  <button id="toggleSecret" type="button" class="mini-btn">显示</button>
+                </div>
+              </label>
+              <label class="field">
+                <span>地域 Region</span>
+                <select data-setting="region">
+                  <option value="ap-guangzhou">广州 ap-guangzhou</option>
+                  <option value="ap-beijing">北京 ap-beijing</option>
+                  <option value="ap-shanghai">上海 ap-shanghai</option>
+                  <option value="ap-hongkong">香港 ap-hongkong</option>
+                  <option value="ap-singapore">新加坡 ap-singapore</option>
+                  <option value="na-siliconvalley">硅谷 na-siliconvalley</option>
+                </select>
+              </label>
+            </div>
+            <p class="hint">腾讯云文本翻译自 2026-10-01 起停止发放新的免费资源包；已有资源包按有效期使用，超出后按量计费。 <a class="link" href="https://console.cloud.tencent.com/capi" target="_blank" rel="noreferrer">获取 SecretId / SecretKey ↗</a> · <a class="link" href="https://console.cloud.tencent.com/mt" target="_blank" rel="noreferrer">开通 TMT ↗</a></p>
+          </div>
+
+          <div id="deeplPanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field">
+                <span>DeepL API Key</span>
+                <div class="secret-wrap">
+                  <input data-setting="deeplApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="DeepL-Auth-Key" />
+                  <button id="toggleDeeplKey" type="button" class="mini-btn">显示</button>
+                </div>
+              </label>
+              <div class="field checkbox-field">
+                <span>&nbsp;</span>
+                <label class="check"><input data-setting="deeplUseFree" type="checkbox" /><span>使用 Free 端点 api-free.deepl.com</span></label>
+              </div>
+            </div>
+            <p class="hint">DeepL API Free 官方页面提到每月约 50 万字符免费（计划状态有调整，以注册页为准）。 <a class="link" href="https://www.deepl.com/pro-api" target="_blank" rel="noreferrer">申请 DeepL API Key ↗</a></p>
+          </div>
+
+          <div id="azurePanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field">
+                <span>Azure Translator Key</span>
+                <div class="secret-wrap">
+                  <input data-setting="azureApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Ocp-Apim-Subscription-Key" />
+                  <button id="toggleAzureKey" type="button" class="mini-btn">显示</button>
+                </div>
+              </label>
+              <label class="field">
+                <span>Region（可选）</span>
+                <input data-setting="azureRegion" type="text" autocomplete="off" spellcheck="false" placeholder="例如 eastasia；全球资源可留空" />
+              </label>
+              <label class="field full">
+                <span>接口地址 Endpoint</span>
+                <input data-setting="azureEndpoint" type="text" autocomplete="off" spellcheck="false" />
+              </label>
+            </div>
+            <p class="hint">Azure Translator F0 免费层约 200 万字符/月；需要 Azure 账号和信用卡。 <a class="link" href="https://portal.azure.com/#create/Microsoft.CognitiveServicesTextTranslation" target="_blank" rel="noreferrer">创建 Translator 资源 ↗</a></p>
+          </div>
+
+          <div id="myMemoryPanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field">
+                <span>联系邮箱（可选，提高额度）</span>
+                <input data-setting="myMemoryEmail" type="email" autocomplete="off" spellcheck="false" placeholder="you@example.com" />
+              </label>
+            </div>
+            <p class="hint">MyMemory 无需 API Key，匿名约 5,000 字符/天；它需要明确源语言，源语言选「自动检测」时会按英语处理。 <a class="link" href="https://mymemory.translated.net/doc/spec.php" target="_blank" rel="noreferrer">API 文档 ↗</a></p>
+          </div>
+
+          <div id="librePanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field">
+                <span>LibreTranslate 地址</span>
+                <input data-setting="libreEndpoint" type="text" autocomplete="off" spellcheck="false" placeholder="http://localhost:5000" />
+              </label>
+              <label class="field">
+                <span>API Key（公共实例可能需要）</span>
+                <div class="secret-wrap">
+                  <input data-setting="libreApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="可留空" />
+                  <button id="toggleLibreKey" type="button" class="mini-btn">显示</button>
+                </div>
+              </label>
+            </div>
+            <p class="hint">可本地 Docker 部署，完全免费；公共实例可能限速或要求 API Key。 <a class="link" href="https://github.com/LibreTranslate/LibreTranslate" target="_blank" rel="noreferrer">部署文档 ↗</a> · <a class="link" href="https://libretranslate.com" target="_blank" rel="noreferrer">公共实例 ↗</a></p>
+          </div>
+
+          <div id="llmPanel" class="provider-panel">
+            <div class="grid two provider-grid">
+              <label class="field full">
+                <span>接口地址 Base URL</span>
+                <input data-setting="llmBaseUrl" id="llmBaseUrl" type="text" autocomplete="off" spellcheck="false" placeholder="例如 https://api.openai.com/v1" />
+              </label>
+              <label class="field">
+                <span>API Key</span>
+                <div class="secret-wrap">
+                  <input data-setting="llmApiKey" id="llmApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-..." />
+                  <button id="toggleLlmKey" type="button" class="mini-btn">显示</button>
+                </div>
+              </label>
+              <label class="field">
+                <span>模型名称 model</span>
+                <div class="model-picker">
+                  <input data-setting="llmModel" id="llmModel" type="text" autocomplete="off" spellcheck="false" list="modelOptions" placeholder="先填 Base URL 和 Key，再点获取模型" />
+                  <button id="fetchModelsBtn" type="button" class="mini-btn">获取模型</button>
+                  <datalist id="modelOptions"></datalist>
+                </div>
+                <span id="modelStatus" class="model-status"></span>
+              </label>
+              <label class="field">
+                <span>温度 temperature</span>
+                <input data-setting="llmTemperature" type="number" min="0" max="2" step="0.1" />
+              </label>
+              <label class="field">
+                <span>单批段数</span>
+                <input data-setting="llmBatchItems" type="number" min="1" max="50" />
+              </label>
+              <label class="field">
+                <span>单批字符</span>
+                <input data-setting="llmBatchChars" type="number" min="500" max="12000" step="100" />
+              </label>
+              <label class="field">
+                <span>最大输出 tokens</span>
+                <input data-setting="llmMaxTokens" type="number" min="256" max="32768" step="256" />
+              </label>
+            </div>
+            <p class="hint" id="llmNote">填写任意兼容 OpenAI 的 Base URL、API Key，再点击「获取模型」从 <code>/models</code> 拉取模型列表；也可以直接手填模型名。参数保持默认即可。</p>
+          </div>
+
+          <label class="switch-row panel-switch">
+            <span><span class="switch-title">连接失效时自动切换</span><span class="switch-desc">按连接列表顺序尝试下一条已启用且有凭证的连接</span></span>
+            <input data-setting="autoFallback" type="checkbox" />
+            <span class="switch-ui"></span>
+          </label>
+
+          <p class="hint">所有密钥只保存在浏览器本地（chrome.storage.local），不会上传到任何第三方服务器；网页内容只会发送到你选择的翻译服务。</p>
+        </section>
+
+        <section id="translation" class="panel">
+          <div class="section-head">
+            <div>
+              <h2>翻译偏好</h2>
+              <p>控制目标语言、显示方式和翻译范围。</p>
+            </div>
+          </div>
+          <div class="grid two">
+            <label class="field"><span>目标语言</span><select data-setting="targetLang" id="targetLang"></select></label>
+            <label class="field"><span>源语言</span><select data-setting="sourceLang" id="sourceLang"></select></label>
+            <label class="field"><span>显示方式</span><select data-setting="displayMode"><option value="bilingual">双语对照（原文 + 译文）</option><option value="translation">仅译文</option></select></label>
+            <label class="field"><span>页面范围</span><select data-setting="pageScope"><option value="smart">智能识别正文（推荐）</option><option value="whole">整个页面（含导航等）</option></select></label>
+            <label class="field"><span>译文字号</span><input data-setting="fontSize" type="text" placeholder="0.95em" /></label>
+            <label class="field"><span>译文颜色（可选）</span><input data-setting="translationColor" type="text" placeholder="留空跟随正文颜色，例如 #2563eb" /></label>
+          </div>
+          <div class="checks">
+            <label class="check"><input data-setting="autoTranslate" type="checkbox" /><span>打开网页时自动翻译</span></label>
+            <label class="check"><input data-setting="sameLangCheck" type="checkbox" /><span>页面已是目标语言时跳过</span></label>
+            <label class="check"><input data-setting="translateUi" type="checkbox" /><span>翻译菜单、侧栏和卡片标签（保持布局）</span></label>
+            <label class="check"><input data-setting="showFloatingBall" type="checkbox" /><span>显示页面右下角浮动翻译按钮</span></label>
+          </div>
+          <div class="quality-note">
+            <strong>翻译边界</strong>
+            <span>智能模式会跳过导航、页脚、按钮、表单控件、代码块和隐藏元素；正文、标题、列表、引用和图片说明会翻译。整页模式只放宽正文范围，仍然跳过代码和交互控件。</span>
+          </div>
+          <div class="translation-preview" aria-label="译文样式预览">
+            <p class="preview-label">译文预览</p>
+            <p class="preview-original">The best way to understand a language is to live inside it.</p>
+            <p class="preview-translation">理解一门语言最好的方式，是住进它的字里行间。</p>
+          </div>
+        </section>
+
+        <section id="shortcuts" class="panel">
+          <div class="section-head"><div><h2>快捷翻译</h2><p>鼠标悬停、划词和输入框翻译。</p></div></div>
+          <div class="checks">
+            <label class="check"><input data-setting="hoverTranslate" type="checkbox" /><span>按住 Shift 悬停翻译段落</span></label>
+            <label class="check"><input data-setting="selectionTranslate" type="checkbox" /><span>划词后显示「译」按钮</span></label>
+            <label class="check"><input data-setting="inputTranslate" type="checkbox" /><span>启用输入框翻译</span></label>
+            <label class="check"><input data-setting="inputTripleSpace" type="checkbox" /><span>输入框内快速连按 3 次空格触发翻译</span></label>
+          </div>
+          <p class="hint">语言命令：<code>/en 你好</code> · <code>/ja 你好</code> · <code>/fr 你好</code>；<code>Ctrl/Cmd + Enter</code> 直接翻译当前输入框。</p>
+        </section>
+
+        <section id="sites" class="panel">
+          <div class="section-head"><div><h2>站点规则</h2><p>每行一个域名，支持 <code>example.com</code> 和 <code>*.example.com</code>。</p></div></div>
+          <div class="grid two">
+            <label class="field"><span>总是自动翻译的网站</span><textarea data-setting="alwaysTranslateDomains" rows="5" placeholder="news.ycombinator.com&#10;medium.com"></textarea></label>
+            <label class="field"><span>从不翻译的网站</span><textarea data-setting="neverTranslateDomains" rows="5" placeholder="mail.google.com&#10;*.bank.com"></textarea></label>
+          </div>
+        </section>
+
+
+        <section id="performance" class="panel">
+          <div class="section-head"><div><h2>性能与缓存</h2><p>大多数情况下保持默认即可；批量参数会按服务商自动调整。</p></div></div>
+          <div class="grid four">
+            <label class="field"><span>单批最大字符</span><input data-setting="batchMaxChars" type="number" min="500" max="1900" step="50" /></label>
+            <label class="field"><span>单批最大条数</span><input data-setting="batchMaxItems" type="number" min="1" max="100" /></label>
+            <label class="field"><span>请求间隔 (ms)</span><input data-setting="requestIntervalMs" type="number" min="0" max="2000" step="20" /></label>
+            <label class="field"><span>失败重试次数</span><input data-setting="maxRetries" type="number" min="0" max="5" /></label>
+            <label class="field"><span>缓存有效期 (小时)</span><input data-setting="cacheTtlHours" type="number" min="1" max="720" /></label>
+            <label class="field"><span>缓存最大条数</span><input data-setting="cacheMaxEntries" type="number" min="100" max="10000" step="100" /></label>
+            <div class="field"><span>&nbsp;</span><label class="check"><input data-setting="cacheEnabled" type="checkbox" /><span>启用翻译缓存</span></label></div>
+            <div class="field"><span>&nbsp;</span><button id="clearCacheBtn" class="ghost-btn" type="button">清除翻译缓存</button></div>
+          </div>
+          <p id="usageText" class="hint">本月已用 0 字符。</p>
+        </section>
+
+        <section id="about" class="panel about">
+          <div class="section-head"><div><h2>关于译屿</h2><p>版本 0.1.0 · 多服务网页翻译</p></div></div>
+          <ul class="feature-list">
+            <li>网页双语对照 / 仅译文，智能识别正文</li>
+            <li>多连接并存，失效自动切换</li>
+            <li>动态内容、悬停、划词、输入框翻译</li>
+            <li>原文恢复、站点规则、缓存和用量统计</li>
+          </ul>
+          <div class="about-actions">
+            <button id="checkUpdateBtn" class="ghost-btn" type="button">检查更新</button>
+            <span id="updateStatus" class="update-status">从 GitHub Releases 检查新版本</span>
+          </div>
+          <p class="hint">PDF、ePub 和视频字幕暂不在当前范围内；这类内容建议使用专门的阅读器或播放器。</p>
+        </section>
+
+        <footer class="footer">
+          <span>译屿 · 本地运行，密钥不出浏览器</span>
+          <span>为长时间阅读而设计</span>
+        </footer>
+      </main>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

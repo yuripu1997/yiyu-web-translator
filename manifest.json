@@ -1,0 +1,93 @@
+{
+  "manifest_version": 3,
+  "name": "译屿 - 网页翻译",
+  "short_name": "译屿",
+  "version": "0.1.0",
+  "description": "译屿 —— 支持阿里云、腾讯云、DeepL、Azure、MyMemory、LibreTranslate 和 OpenAI 兼容大模型的网页双语翻译扩展。",
+  "default_locale": "zh_CN",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://tmt.tencentcloudapi.com/*",
+    "https://open.bigmodel.cn/*",
+    "https://api.siliconflow.cn/*",
+    "https://dashscope.aliyuncs.com/*",
+    "https://qianfan.baidubce.com/*",
+    "https://ark.cn-beijing.volces.com/*",
+    "https://api.deepseek.com/*",
+    "https://api.moonshot.cn/*",
+    "https://api.minimax.chat/*",
+    "https://tokenhub-intl.tencentcloudmaas.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "https://api.openai.com/*",
+    "https://api.qnaigc.com/*",
+    "https://api-free.deepl.com/*",
+    "https://api.deepl.com/*",
+    "https://api.cognitive.microsofttranslator.com/*",
+    "https://api.mymemory.translated.net/*",
+    "https://mt.cn-hangzhou.aliyuncs.com/*",
+    "https://mt.aliyuncs.com/*",
+    "https://libretranslate.com/*",
+    "https://libretranslate.de/*",
+    "https://api.github.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "译屿 - 网页翻译",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "toggle-translate": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "翻译 / 恢复当前网页"
+    },
+    "translate-whole-page": {
+      "suggested_key": {
+        "default": "Alt+W"
+      },
+      "description": "翻译整个页面（包括非正文区域）"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
