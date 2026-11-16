@@ -17,5 +17,9 @@
     "jsdom": "^26.1.0",
     "tencentcloud-sdk-nodejs-common": "^4.1.220",
     "vitest": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GOBUT/yiyu-web-translator.git"
   }
 }
