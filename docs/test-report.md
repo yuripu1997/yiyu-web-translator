@@ -37,7 +37,8 @@ npm run package
 ```
 
 - `dist/` 打包成功
-- `yiyu-web-translator.zip` 339KB
+- `release/yiyu-chromium-v0.1.0.zip` 340KB
+- `release/yiyu-firefox-v0.1.0.zip` 340KB
 - Chrome `--pack-extension` 校验通过
 
 ## 真实浏览器冒烟测试

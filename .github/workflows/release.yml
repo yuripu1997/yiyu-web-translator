@@ -29,4 +29,3 @@ jobs:
           files: |
             release/yiyu-chromium-*.zip
             release/yiyu-firefox-*.zip
-            release/yiyu-chromium-*.crx
