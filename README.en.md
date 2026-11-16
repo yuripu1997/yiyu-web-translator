@@ -94,7 +94,7 @@ YIYU:
 
 ## Configuration
 
-The default provider is **Alibaba Cloud Machine Translation**. Open Settings, pick a provider and enter your credentials. You can save multiple connections and switch between them at any time.
+The default provider is **Alibaba Cloud Machine Translation**, which includes **1 million characters of free translation per month** (reset on the 1st; subject to Alibaba Cloud's current policy). Open Settings, pick a provider and enter your credentials. You can save multiple connections and switch between them at any time.
 
 ### LLM
 
