@@ -1,6 +1,6 @@
 {
   "name": "yiyu-web-translator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "译屿 —— 支持多连接、多服务商和 OpenAI 兼容大模型的网页双语翻译扩展",

@@ -8,7 +8,7 @@
 
 一个安静、克制、为长时间阅读设计的网页双语翻译扩展。
 
-[![Version](https://img.shields.io/badge/version-0.1.0-0f4c45?style=flat-square)](https://github.com/GOBUT/yiyu-web-translator/releases)
+[![Version](https://img.shields.io/badge/version-0.1.1-0f4c45?style=flat-square)](https://github.com/GOBUT/yiyu-web-translator/releases)
 [![Manifest V3](https://img.shields.io/badge/Chrome%20%2F%20Edge-MV3-0f4c45?style=flat-square)]()
 [![Firefox](https://img.shields.io/badge/Firefox-experimental-bf452c?style=flat-square)]()
 [![Tests](https://img.shields.io/badge/tests-74%20passed-2f6b52?style=flat-square)]()
@@ -73,7 +73,7 @@
 
 ### Chrome / Edge / Brave（Chromium）
 
-1. 打开 [Releases](https://github.com/GOBUT/yiyu-web-translator/releases)，下载 `yiyu-chromium-v0.1.0.zip`。
+1. 打开 [Releases](https://github.com/GOBUT/yiyu-web-translator/releases)，下载 `yiyu-chromium-v0.1.1.zip`。
 2. 解压到一个固定目录。
 3. Chrome 打开 `chrome://extensions`；Edge 打开 `edge://extensions`。
 4. 打开右上角「开发者模式」。
@@ -84,7 +84,7 @@
 
 ### Firefox
 
-1. 打开 [Releases](https://github.com/GOBUT/yiyu-web-translator/releases)，下载 `yiyu-firefox-v0.1.0.zip`。
+1. 打开 [Releases](https://github.com/GOBUT/yiyu-web-translator/releases)，下载 `yiyu-firefox-v0.1.1.zip`。
 2. 解压。
 3. Firefox 打开 `about:debugging#/runtime/this-firefox`。
 4. 点击「临时载入附加组件」，选择解压目录里的 `manifest.json`。

@@ -91,6 +91,21 @@ describe("网页正文识别", () => {
     expect(document.querySelector(".twt-module-pair")?.textContent).toContain("Bounty");
   });
 
+  it("正文容器 class 含 engagement 时仍能翻译（Bugcrowd engagement 页回归）", () => {
+    setBody(`<main><div class="rp-researcher-engagement-brief__content engagement-brief-content">
+      <p>Welcome to the bug bounty program! This paragraph is long enough to be a real content unit.</p>
+    </div></main>`);
+    const units = collectUnits(document.querySelector("main")).map((unit) => unit.text);
+    expect(units.join(" ")).toContain("Welcome to the bug bounty program");
+  });
+
+  it("视觉隐藏的 sr-only 文本不进入翻译队列", () => {
+    setBody(`<main><figcaption class="bc-helper-sronly">Payment reward chart</figcaption><p>This is a visible paragraph long enough to translate.</p></main>`);
+    const units = collectUnits(document.querySelector("main")).map((unit) => unit.text);
+    expect(units).toContain("This is a visible paragraph long enough to translate.");
+    expect(units).not.toContain("Payment reward chart");
+  });
+
   it("whole 模式可以包含导航区域", () => {
     setBody(`<nav><p>首页 新闻 关于我们</p></nav><main><p>正文段落。</p></main>`);
     const smart = collectUnits(document.body);

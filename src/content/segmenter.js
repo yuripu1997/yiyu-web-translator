@@ -103,8 +103,15 @@ const SKIP_SELECTOR = [
   "[role='img']",
   "[data-testid*='icon']",
   "[class*='Icon-module']",
-  "[id*='engagement']",
-  "[class*='engagement']",
+  // 仅跳过 HackerOne 注入的 engagement 浮层组件；不要因为 class/id 里含
+  // “engagement”就跳过正文（Bugcrowd 的 engagement 页面正文容器普遍带这个词）。
+  "[id^='engagement-wrapper']",
+  "[id^='engagement-toast']",
+  "[class*='engagement-widget']",
+  "[class*='engagement-card-portal']",
+  "[class*='engagement-modal']",
+  "[class*='engagement-nudge']",
+  "[class*='engagement-tooltip']",
 ].join(",");
 
 const BLOCK_DISPLAY = /^(block|flow-root|list-item|table-cell|table-caption|flex|grid)$/;
@@ -132,10 +139,11 @@ export function isVisible(element) {
 
 export function visibleText(element) {
   if (!element) return "";
-  const inner = element.innerText;
-  if (typeof inner === "string" && inner.trim()) return inner;
-  // 隐藏的 style/script 文本不能当成页面正文（innerText 为空时会踩到 textContent）。
   if (element.querySelector?.("style,script,noscript,template")) return "";
+  const view = element.ownerDocument?.defaultView;
+  if (view?.HTMLElement && element instanceof view.HTMLElement && "innerText" in element) {
+    return element.innerText || "";
+  }
   return element.textContent || "";
 }
 
@@ -173,6 +181,8 @@ function linkDensity(element, textLength) {
 
 const UI_TERMS = /^(campaign|bount(?:y|ies)|domain|asset|industry|search|filter|sort|popular|updated|new|featured|opportunit(?:y|ies)|program|programs|view|see all|show more|read more|learn more|menu|home|next|previous|loading|submit|save|cancel|close|all programs|all assets|all industries)$/i;
 const UI_CLASS = /(?:^|[-_ ])(?:card|badge|chip|pill|tag|meta|label|status|count|toolbar|filter|search|result|listing|nav|menu|button|cta|breadcrumb|pagination|tab|tooltip|popover|modal|overlay|portal)(?:$|[-_ ])/i;
+// 只给屏幕阅读器看的内容（视觉隐藏），不翻译；真实用户看不到这些文字。
+const SR_ONLY_CLASS = /(?:^|[-_ ])(?:sronly|sr-only|visually-hidden|screen-reader-only|helper-sronly)(?:$|[-_ ])/i;
 
 function looksLikeNoise(text) {
   const compact = text.replace(/\s+/g, "");
@@ -219,6 +229,7 @@ export function isTranslateCandidate(element, text, { wholePage = false } = {}) 
   if (element.tagName === "P" && normalized.length < 18 && !wholePage && !element.closest("article")) return false;
   if (UI_TERMS.test(normalized)) return false;
   if (element.className && UI_CLASS.test(String(element.className))) return false;
+  if (element.closest(".sronly,.sr-only,.visually-hidden,.screen-reader-only,[class*='sronly'],[class*='helper-sronly']")) return false;
 
   if (!wholePage) {
     const contentRoot = element.closest("article,main,[role='main']");
@@ -256,6 +267,7 @@ function isGenericCandidate(element, text) {
   if (normalized.length < 80) return false;
   if (looksLikeNoise(normalized) || UI_TERMS.test(normalized)) return false;
   if (element.className && UI_CLASS.test(String(element.className))) return false;
+  if (element.closest(".sronly,.sr-only,.visually-hidden,[class*='sronly'],[class*='helper-sronly']")) return false;
   if (element.querySelector("a, button, input, select, textarea, [role='button'], [role='tab'], svg, [role='img'], [data-testid*='icon']")) return false;
   if (/font-bold/i.test(String(element.className || "")) && !isHeadingLike(element) && normalized.length < 120) return false;
   return true;
@@ -368,6 +380,7 @@ function isUiTextNode(node, contentUnits, moduleRoots = []) {
   if (UI_TEXT_SKIP_TAGS.has(parent.tagName)) return false;
   if (parent.closest("style,script,noscript,template,textarea,button,[role='button'],[role='img'],[role='tooltip'],[role='dialog'],.tooltip,.popover,.modal,.overlay,.twt-translation,.twt-original-content,.twt-module-clone")) return false;
   if (!isVisible(parent)) return false;
+  if (parent.closest(".sronly,.sr-only,.visually-hidden,[class*='sronly'],[class*='helper-sronly']")) return false;
   if (contentUnits.some((unit) => unit.element === parent || unit.element.contains(parent))) return false;
   if (moduleRoots.some((root) => root === parent || root.contains(parent))) return false;
   if (parent.closest("[data-twt-inline-translated]")) return false;
@@ -384,6 +397,7 @@ function isModuleTextNode(node) {
   if (UI_TEXT_SKIP_TAGS.has(parent.tagName)) return false;
   if (parent.closest("style,script,noscript,template,textarea,[role='img'],[role='tooltip'],[role='dialog'],.tooltip,.popover,.modal,.overlay,.twt-translation,.twt-original-content,.twt-module-clone")) return false;
   if (!isVisible(parent)) return false;
+  if (parent.closest(".sronly,.sr-only,.visually-hidden,[class*='sronly'],[class*='helper-sronly']")) return false;
   const text = normalizeText(node.nodeValue);
   if (text.length < 2 || text.length > 500) return false;
   if (looksLikeNoise(text)) return false;

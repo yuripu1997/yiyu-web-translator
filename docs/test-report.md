@@ -1,7 +1,7 @@
 # 译屿测试报告
 
 日期：2026-11-16
-版本：0.1.0（菜单/卡片双语、多连接、网页正文识别优化、手动大模型配置）
+版本：0.1.1（菜单/卡片双语、多连接、网页正文识别优化、手动大模型配置）
 
 ## 自动化测试
 
@@ -14,7 +14,7 @@ npm test
 结果：
 
 - 测试文件：20 个全部通过
-- 测试用例：74 个全部通过
+- 测试用例：76 个全部通过
 - 覆盖：
   - TC3-HMAC-SHA256 签名与腾讯云官方 Node SDK `Sign.sign3` 对比
   - 腾讯云 `TextTranslateBatch` 请求/响应/错误码
@@ -62,6 +62,13 @@ npm run package
 - 未使用真实密钥发起付费调用（各 provider 均需用户自己的 Key）。
 - 未覆盖 PDF、ePub、YouTube 字幕等非 HTML 内容。
 - 未做长时间真实站点回归（建议安装后用 3–5 个常用站点手动验收）。
+
+## Bugcrowd engagement 页面专项验证
+
+- 拉取 `https://bugcrowd.com/engagements/trm-labs-public-mbb` 渲染后的真实 DOM，定位根因：为跳过 HackerOne 浮层加入的 `[class*='engagement']` / `[id*='engagement']` 过于宽泛，而 Bugcrowd 正文容器普遍带 engagement，导致整页正文被跳过。
+- 收窄为精确浮层组件选择器；修复后正文/标题/列表 71 块、菜单 23 项全部进入双语渲染。
+- 修复 `visibleText()`：浏览器内隐藏元素的 `innerText` 为空时不再错误回落到 `textContent`；`bc-helper-sronly` 等屏幕阅读器专用文本不再翻译。
+- Chrome for Testing 实际加载修复版扩展翻译该页面，验证正文 “Welcome to TRM Labs…” 已翻译、CSS 未泄露。
 
 ## UI 与多连接验证
 

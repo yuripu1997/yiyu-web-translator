@@ -8,10 +8,10 @@
 
 A calm, considered bilingual webpage translator built for long reading sessions.
 
-[![Version](https://img.shields.io/badge/version-0.1.0-0f4c45?style=flat-square)](https://github.com/GOBUT/yiyu-web-translator/releases)
+[![Version](https://img.shields.io/badge/version-0.1.1-0f4c45?style=flat-square)](https://github.com/GOBUT/yiyu-web-translator/releases)
 [![Manifest V3](https://img.shields.io/badge/Chrome%20%2F%20Edge-MV3-0f4c45?style=flat-square)]()
 [![Firefox](https://img.shields.io/badge/Firefox-experimental-bf452c?style=flat-square)]()
-[![Tests](https://img.shields.io/badge/tests-74%20passed-2f6b52?style=flat-square)]()
+[![Tests](https://img.shields.io/badge/tests-76%20passed-2f6b52?style=flat-square)]()
 [![License](https://img.shields.io/badge/license-MIT-17231e?style=flat-square)](LICENSE)
 
 **English** · [简体中文](README.md)
@@ -74,7 +74,7 @@ YIYU:
 
 ### Chrome / Edge / Brave (Chromium)
 
-1. Open [Releases](https://github.com/GOBUT/yiyu-web-translator/releases) and download `yiyu-chromium-v0.1.0.zip`.
+1. Open [Releases](https://github.com/GOBUT/yiyu-web-translator/releases) and download `yiyu-chromium-v0.1.1.zip`.
 2. Extract it into a permanent folder.
 3. Open `chrome://extensions` (or `edge://extensions`).
 4. Turn on **Developer mode**.
@@ -85,7 +85,7 @@ YIYU:
 
 ### Firefox
 
-1. Download `yiyu-firefox-v0.1.0.zip` from [Releases](https://github.com/GOBUT/yiyu-web-translator/releases).
+1. Download `yiyu-firefox-v0.1.1.zip` from [Releases](https://github.com/GOBUT/yiyu-web-translator/releases).
 2. Extract it.
 3. Open `about:debugging#/runtime/this-firefox`.
 4. Click **Load Temporary Add-on** and select `manifest.json`.
