@@ -312,3 +312,14 @@ select:focus { border-color: var(--forest); }
   font-weight: 700;
   text-decoration: none;
 }
+
+.update-notice button {
+  flex: 0 0 auto;
+  padding: 3px 9px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--forest);
+  color: #fffaf0;
+  font: 600 11px/1.5 inherit;
+  cursor: pointer;
+}

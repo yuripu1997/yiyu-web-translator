@@ -21,7 +21,7 @@ import { normalizeLanguage, parseInputCommand } from "../shared/languages.js";
 import { hasUsableProfiles, resolveSettings } from "../shared/profiles.js";
 
 const SKIP_HOVER_SELECTOR =
-  ".twt-translation,.twt-original-content,.twt-hover-tooltip,.twt-selection-btn,.twt-selection-card,.twt-setup-banner,.twt-progress,.twt-toast";
+  ".twt-translation,.twt-original-content,.twt-ui-original,.twt-ui-translation,.twt-module-clone,[data-twt-ui-translated],[data-twt-module-source],.twt-hover-tooltip,.twt-selection-btn,.twt-selection-card,.twt-setup-banner,.twt-progress,.twt-toast";
 
 function codePointLength(text) {
   return Array.from(String(text ?? "")).length;
@@ -226,7 +226,7 @@ export function createPageTranslator({
             targetLang: settings().targetLang || "zh",
           });
         }
-        state.units.set(unit.element, unit);
+        state.units.set(unit.textNode || unit.element, unit);
       }
     });
     return units.length;
@@ -376,9 +376,14 @@ export function createPageTranslator({
         state.modulePending.set(unit.moduleClone, (state.modulePending.get(unit.moduleClone) || 0) + 1);
       }
     }
-    const fresh = candidates.filter(
-      (unit) => !state.units.has(unit.element) && !unit.element.querySelector(":scope > .twt-translation"),
-    );
+    const fresh = candidates.filter((unit) => {
+      const key = unit.textNode || unit.element;
+      if (state.units.has(key)) return false;
+      if (unit.renderMode === "inline" || unit.renderMode === "module") {
+        return Boolean(unit.textNode?.isConnected);
+      }
+      return !unit.element.querySelector(":scope > .twt-translation");
+    });
     if (!fresh.length) return;
     state.translating = true;
     try {

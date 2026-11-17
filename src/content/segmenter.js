@@ -378,12 +378,12 @@ function isUiTextNode(node, contentUnits, moduleRoots = []) {
   const parent = node.parentElement;
   if (!parent || !node.nodeValue?.trim()) return false;
   if (UI_TEXT_SKIP_TAGS.has(parent.tagName)) return false;
-  if (parent.closest("style,script,noscript,template,textarea,button,[role='button'],[role='img'],[role='tooltip'],[role='dialog'],.tooltip,.popover,.modal,.overlay,.twt-translation,.twt-original-content,.twt-module-clone")) return false;
+  if (parent.closest("style,script,noscript,template,textarea,button,[role='button'],[role='img'],[role='tooltip'],[role='dialog'],.tooltip,.popover,.modal,.overlay,.twt-translation,.twt-original-content,.twt-module-clone,.twt-ui-original,.twt-ui-translation,[data-twt-ui-translated],[data-twt-module-source]")) return false;
   if (!isVisible(parent)) return false;
   if (parent.closest(".sronly,.sr-only,.visually-hidden,[class*='sronly'],[class*='helper-sronly']")) return false;
   if (contentUnits.some((unit) => unit.element === parent || unit.element.contains(parent))) return false;
   if (moduleRoots.some((root) => root === parent || root.contains(parent))) return false;
-  if (parent.closest("[data-twt-inline-translated]")) return false;
+  if (parent.closest("[data-twt-ui-translated],[data-twt-module-source],.twt-ui-original,.twt-ui-translation")) return false;
   const text = normalizeText(node.nodeValue);
   if (text.length < 2 || text.length > 220) return false;
   if (looksLikeNoise(text)) return false;
@@ -395,7 +395,7 @@ function isModuleTextNode(node) {
   const parent = node.parentElement;
   if (!parent || !node.nodeValue?.trim()) return false;
   if (UI_TEXT_SKIP_TAGS.has(parent.tagName)) return false;
-  if (parent.closest("style,script,noscript,template,textarea,[role='img'],[role='tooltip'],[role='dialog'],.tooltip,.popover,.modal,.overlay,.twt-translation,.twt-original-content,.twt-module-clone")) return false;
+  if (parent.closest("style,script,noscript,template,textarea,[role='img'],[role='tooltip'],[role='dialog'],.tooltip,.popover,.modal,.overlay,.twt-translation,.twt-original-content,.twt-module-clone,.twt-ui-original,.twt-ui-translation,[data-twt-ui-translated],[data-twt-module-source]")) return false;
   if (!isVisible(parent)) return false;
   if (parent.closest(".sronly,.sr-only,.visually-hidden,[class*='sronly'],[class*='helper-sronly']")) return false;
   const text = normalizeText(node.nodeValue);

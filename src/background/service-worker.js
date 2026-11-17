@@ -136,6 +136,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           sendResponse({ ok: true, result });
           break;
         }
+        case "TWT_DOWNLOAD_UPDATE": {
+          const url = String(message.url || "");
+          if (!/^https:\/\/github\.com\//i.test(url) && !/^https:\/\/objects\.githubusercontent\.com\//i.test(url)) {
+            sendResponse({ ok: false, error: { code: "INVALID_URL", message: "下载地址不合法" } });
+            break;
+          }
+          try {
+            const downloadId = await chrome.downloads.download({ url, saveAs: true });
+            sendResponse({ ok: true, downloadId });
+          } catch (error) {
+            sendResponse(errorResponse(error));
+          }
+          break;
+        }
         case "TWT_CHECK_UPDATE": {
           const update = await checkForUpdates({ currentVersion: chrome.runtime.getManifest().version });
           sendResponse({ ok: true, update });

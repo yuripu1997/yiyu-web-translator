@@ -1,7 +1,7 @@
 # 译屿测试报告
 
 日期：2026-11-16
-版本：0.1.1（菜单/卡片双语、多连接、网页正文识别优化、手动大模型配置）
+版本：0.1.2（菜单/卡片双语、多连接、网页正文识别优化、手动大模型配置）
 
 ## 自动化测试
 
@@ -14,7 +14,7 @@ npm test
 结果：
 
 - 测试文件：20 个全部通过
-- 测试用例：76 个全部通过
+- 测试用例：79 个全部通过
 - 覆盖：
   - TC3-HMAC-SHA256 签名与腾讯云官方 Node SDK `Sign.sign3` 对比
   - 腾讯云 `TextTranslateBatch` 请求/响应/错误码
@@ -62,6 +62,17 @@ npm run package
 - 未使用真实密钥发起付费调用（各 provider 均需用户自己的 Key）。
 - 未覆盖 PDF、ePub、YouTube 字幕等非 HTML 内容。
 - 未做长时间真实站点回归（建议安装后用 3–5 个常用站点手动验收）。
+
+## 重复翻译修复验证（v0.1.2 待发布）
+
+- 现象：菜单项出现「原文 + 译文 × 7」。根因是 `renderInlineTranslation` 插入的 `.twt-ui-original/.twt-ui-translation` 不在 MutationObserver 白名单里，新节点被 `scanNewContent()` 再次收集翻译，形成递归。
+- 修复：白名单纳入自渲染节点；inline/module 用 `textNode` 去重；渲染幂等；UI 收集跳过已翻译节点。
+- Chrome for Testing 实测：翻译后每个菜单项仅 1 条译文；连续 4 轮插入动态 DOM 并等待 observer 触发后，仍为 1 条，无累积重复。
+
+## 一键升级
+
+- 新增 GitHub Release 一键升级：设置页/弹窗检测到新版本后可直接点击「一键升级」，扩展通过 `chrome.downloads` 从 Release 下载对应浏览器安装包。
+- 说明：浏览器扩展无法在 MV3 下静默替换自身文件；下载后仍需解压覆盖目录并在扩展页点击「重新加载」。
 
 ## Bugcrowd engagement 页面专项验证
 

@@ -800,3 +800,6 @@ code {
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--forest) 32%, transparent);
 }
+
+.hidden { display: none !important; }
+.about-actions .primary-btn.small { padding: 7px 14px; font-size: 12px; }

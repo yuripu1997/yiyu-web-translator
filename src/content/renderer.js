@@ -28,6 +28,7 @@ export function renderInlineTranslation(unit, translationText, { targetLang = ""
   const node = unit.textNode;
   const parent = node?.parentElement;
   if (!node || !parent || !node.isConnected) return null;
+  if (parent.hasAttribute("data-twt-ui-translated") || parent.closest(".twt-ui-original,.twt-ui-translation")) return null;
   const doc = parent.ownerDocument;
   const original = String(node.nodeValue ?? "");
   const originalSpan = doc.createElement("span");

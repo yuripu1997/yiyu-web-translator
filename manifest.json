@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "译屿 - 网页翻译",
   "short_name": "译屿",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "译屿 —— 支持阿里云、腾讯云、DeepL、Azure、MyMemory、LibreTranslate 和 OpenAI 兼容大模型的网页双语翻译扩展。",
   "default_locale": "zh_CN",
   "permissions": [
@@ -10,7 +10,8 @@
     "contextMenus",
     "activeTab",
     "tabs",
-    "scripting"
+    "scripting",
+    "downloads"
   ],
   "host_permissions": [
     "https://tmt.tencentcloudapi.com/*",

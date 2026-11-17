@@ -218,6 +218,12 @@ async function checkUpdate() {
   }
   $("updateText").textContent = `发现新版本 v${update.latestVersion}`;
   $("updateLink").href = update.releaseUrl || "https://github.com/GOBUT/yiyu-web-translator/releases";
+  $("updateDownloadBtn").onclick = () => {
+    sendToBackground({
+      type: "TWT_DOWNLOAD_UPDATE",
+      url: /Firefox/i.test(navigator.userAgent) ? update.firefoxUrl : update.chromiumUrl,
+    });
+  };
   notice.classList.remove("hidden");
 }
 

@@ -393,6 +393,8 @@ $("providerSelect").addEventListener("change", async () => {
 });
 
 
+let latestUpdate = null;
+
 async function checkUpdate() {
   const button = $("checkUpdateBtn");
   const status = $("updateStatus");
@@ -406,10 +408,25 @@ async function checkUpdate() {
     return;
   }
   const update = response.update || {};
+  latestUpdate = update.hasUpdate ? update : null;
+  $("downloadUpdateBtn")?.classList.toggle("hidden", !latestUpdate);
   if (update.hasUpdate) {
     status.innerHTML = `发现新版本 v${update.latestVersion} — <a href="${update.releaseUrl}" target="_blank" rel="noreferrer">查看 Release ↗</a>`;
   } else {
     status.textContent = `已是最新版本 v${update.currentVersion || "0.1.0"}`;
+  }
+}
+
+async function downloadUpdate() {
+  if (!latestUpdate) return;
+  const url = navigator.userAgent.includes("Firefox") ? latestUpdate.firefoxUrl : latestUpdate.chromiumUrl;
+  if (!url) return;
+  const response = await sendToBackground({ type: "TWT_DOWNLOAD_UPDATE", url });
+  const status = $("updateStatus");
+  if (response?.ok) {
+    status.textContent = "新版已开始下载；下载完成后解压覆盖旧目录，再到扩展页点击「重新加载」。";
+  } else {
+    status.textContent = `下载失败：${response?.error?.message || "请到 Release 页面手动下载"}`;
   }
 }
 
@@ -426,5 +443,6 @@ $("resetBtn").addEventListener("click", async () => {
 });
 
 $("checkUpdateBtn").addEventListener("click", checkUpdate);
+$("downloadUpdateBtn").addEventListener("click", downloadUpdate);
 
 load().catch((error) => setSaveStatus(`加载失败：${error.message}`, false));
